@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Block now unoccluded at top-view pixel (181,190) -> (0.209, 0.058); hovering the open gripper above it.", "targets": {"x": 0.209, "y": 0.058, "z": 0.15, "gripper": 1.0}}}

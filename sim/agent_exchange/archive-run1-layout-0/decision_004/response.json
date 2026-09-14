@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Grasp confirmed (gripper reading stalled at 0.66 by the block); lifting straight up to clear the table before transporting.", "targets": {"x": 0.305, "y": 0.19, "z": 0.22, "gripper": 0.0}}}

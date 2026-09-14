@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Block is held in the jaws at 22 cm height; transporting horizontally to a point above the bowl centre (0.30, -0.14), staying high to clear the rim.", "targets": {"x": 0.3, "y": -0.14, "z": 0.22, "gripper": 0.0}}}

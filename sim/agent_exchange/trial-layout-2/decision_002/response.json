@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Top view (unoccluded) puts the block at pixel (208.5,193.5) -> (0.254, 0.051) at 600 px/m; hovering the open gripper above it.", "targets": {"x": 0.254, "y": 0.051, "z": 0.15, "gripper": 1.0}}}

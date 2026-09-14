@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>qwen3.8-max · 机械臂实时测试</title>
+<style>
+ body{background:#14161a;color:#e8e8e8;font:14px/1.5 system-ui;margin:0;padding:16px}
+ h1{font-size:16px;margin:0 0 4px}
+ #meta{color:#9aa4b2;margin-bottom:12px;white-space:pre-wrap}
+ .grid{display:grid;grid-template-columns:repeat(2,minmax(0,480px));gap:12px}
+ figure{margin:0} img{width:100%;border-radius:8px;border:1px solid #2a2f36;image-rendering:auto}
+ figcaption{color:#9aa4b2;text-align:center;margin-top:4px}
+</style></head><body>
+<h1>qwen3.8-max · 机械臂实时测试</h1>
+<div id="sub" style="color:#9aa4b2;margin-bottom:8px">qwen3.8-max（ZCode 会话 file-handshake 策略）· 红色方块放入白碗 · 仅俯视(top)+侧视(side)两路相机 + 本体状态决策（无坐标读数；wrist 机位已禁用）· 端口 8765</div>
+<div id="meta">loading…</div>
+<div class="grid">
+ <figure><img id="top" alt="top"><figcaption>top（正上方）</figcaption></figure>
+ <figure><img id="side" alt="side"><figcaption>side（前侧斜视）</figcaption></figure>
+</div>
+<script>
+async function tick(){
+  try{
+    const [f, m] = await Promise.all([
+      fetch('/top.png?t='+Date.now()).then(r=>r.blob()),
+      fetch('/side.png?t='+Date.now()).then(r=>r.blob()),
+    ]);
+    document.getElementById('top').src = URL.createObjectURL(f);
+    document.getElementById('side').src = URL.createObjectURL(m);
+    const meta = await fetch('/meta.json?t='+Date.now()).then(r=>r.json());
+    document.getElementById('meta').textContent =
+      `step ${meta.step} | eef x=${meta.eef[0]} y=${meta.eef[1]} z=${meta.eef[2]} grip=${meta.eef[3]}` +
+      `（策略信息集=两路相机+本体状态；方块真值不在页面/策略通道，仅存 meta_priv.json 供赛后审计）`;
+  }catch(e){ document.getElementById('meta').textContent = 'waiting for first frame… ('+e+')'; }
+}
+tick(); setInterval(tick, 500);
+</script></body></html>

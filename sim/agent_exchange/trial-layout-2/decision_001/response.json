@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Top view shows no red pixel: the arm occludes the spawn region at the ready pose; moving the open gripper to the far -y corner to unocclude (top-view judgement).", "targets": {"x": 0.42, "y": -0.22, "z": 0.3, "gripper": 1.0}}}

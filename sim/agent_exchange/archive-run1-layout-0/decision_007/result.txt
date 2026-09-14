@@ -1,0 +1,1 @@
+give_up: The block was dropped when the weld released on the first post-grasp move (motion-layer gripper interpolation starts at the measured 0.66 > release threshold 0.6) and slid to (0.48, 0.35), outside the action space bounds (x<=0.45, y<=0.25); re-grasp is unreachable.

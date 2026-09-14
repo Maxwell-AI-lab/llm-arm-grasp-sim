@@ -1,0 +1,19 @@
+# python env & caches
+.venv/
+__pycache__/
+*.pyc
+
+# experiment outputs (large)
+logs*/
+*.out
+nohup.out
+
+# media & scratch renders
+video/
+*.png
+!docs/img/*.png
+
+# secrets
+.env
+.env.*
+!.env.example

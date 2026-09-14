@@ -1,0 +1,59 @@
+<mujoco model="yam block-into-bowl">
+  <include file="yam.xml"/>
+
+  <option timestep="0.002" iterations="50" tolerance="1e-8"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <global azimuth="140" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.55 0.55 0.55" rgb2="0.1 0.1 0.1" width="512" height="3072"/>
+    <texture type="2d" name="tabletex" builtin="checker" mark="edge" rgb1="0.45 0.33 0.22" rgb2="0.38 0.27 0.17"
+      markrgb="0.5 0.4 0.3" width="300" height="300"/>
+    <material name="tablemat" texture="tabletex" texuniform="true" texrepeat="4 4" reflectance="0.05"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0.3 0 1.5" dir="0 0 -1" directional="true"/>
+
+    <!-- table surface (arm base sits on it) -->
+    <geom name="table" type="plane" size="0 0 0.05" material="tablemat" contype="1" conaffinity="1" pos="0 0 -0.001"/>
+
+    <!-- red block: 5 cm cube, free body; pos overwritten per episode seed -->
+    <body name="block" pos="0.28 0.10 0.026">
+      <freejoint name="block_free"/>
+      <geom name="block_geom" type="box" size="0.025 0.025 0.025" mass="0.08" condim="4"
+            rgba="0.85 0.1 0.1 1" friction="1.2 0.05 0.01" contype="1" conaffinity="1"/>
+    </body>
+
+    <!-- bowl: bottom disk + 10 wall segments, static. inner radius ~0.055, rim z=0.05 -->
+    <body name="bowl" pos="0.30 -0.14 0">
+      <geom name="bowl_bottom" type="cylinder" size="0.068 0.004" pos="0 0 0.004"
+            rgba="0.92 0.92 0.92 1" contype="1" conaffinity="1" mass="0"/>
+      <geom name="bowl_w0" type="box" size="0.021 0.007 0.025" pos="0.061 0 0.025"        euler="0 0 1.5708" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w1" type="box" size="0.021 0.007 0.025" pos="0.0489 0.0367 0.025"  euler="0 0 2.1991" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w2" type="box" size="0.021 0.007 0.025" pos="0.0188 0.0579 0.025"  euler="0 0 2.8274" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w3" type="box" size="0.021 0.007 0.025" pos="-0.0188 0.0579 0.025" euler="0 0 -2.8274" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w4" type="box" size="0.021 0.007 0.025" pos="-0.0489 0.0367 0.025" euler="0 0 -2.1991" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w5" type="box" size="0.021 0.007 0.025" pos="-0.061 0 0.025"       euler="0 0 -1.5708" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w6" type="box" size="0.021 0.007 0.025" pos="-0.0489 -0.0367 0.025" euler="0 0 -0.9425" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w7" type="box" size="0.021 0.007 0.025" pos="-0.0188 -0.0579 0.025" euler="0 0 -0.3142" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w8" type="box" size="0.021 0.007 0.025" pos="0.0188 -0.0579 0.025"  euler="0 0 0.3142" rgba="0.92 0.92 0.92 1" mass="0"/>
+      <geom name="bowl_w9" type="box" size="0.021 0.007 0.025" pos="0.0489 -0.0367 0.025"  euler="0 0 0.9425" rgba="0.92 0.92 0.92 1" mass="0"/>
+    </body>
+
+    <!-- cameras: top-down + oblique side view of the workspace -->
+    <camera name="top" pos="0.28 0 0.95" xyaxes="1 0 0 0 1 0" fovy="45"/>
+    <camera name="side" pos="0.28 -0.85 0.55" xyaxes="1 0 0 0 0.55 0.835" fovy="45"/>
+    <!-- wrist camera: pose overwritten every render to track the gripper (see yam_sim._observe) -->
+    <camera name="wrist" pos="0 0 0.5" fovy="70"/>
+  </worldbody>
+
+  <!-- sticky-grasp assist: activated at runtime when the gripper closes on the
+       block (MuJoCo rigid point contacts cannot reproduce rubber-pad friction) -->
+  <equality>
+    <weld name="grasp_weld" body1="link_6" body2="block" active="false"/>
+  </equality>
+</mujoco>

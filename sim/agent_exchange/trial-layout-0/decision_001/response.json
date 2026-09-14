@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Run 2, same seed: top-view calibration places the red block at (0.305, 0.190); hovering the open gripper above it.", "targets": {"x": 0.305, "y": 0.19, "z": 0.15, "gripper": 1.0}}}

@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "The dropped block slid beyond the workspace limits to (0.48, 0.35); moving to the closest reachable corner above it to attempt a re-grasp.", "targets": {"x": 0.44, "y": 0.24, "z": 0.15, "gripper": 1.0}}}

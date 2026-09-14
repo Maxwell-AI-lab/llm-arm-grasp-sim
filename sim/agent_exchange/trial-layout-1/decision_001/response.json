@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "The block is occluded by the arm in the top view at the ready pose; moving the open gripper to the far -y corner to unocclude the spawn region for visual measurement.", "targets": {"x": 0.42, "y": -0.22, "z": 0.3, "gripper": 1.0}}}

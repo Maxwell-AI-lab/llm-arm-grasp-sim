@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "At pinch height over the block; closing the gripper to grasp (command held at 0).", "targets": {"x": 0.305, "y": 0.19, "z": 0.03, "gripper": 0.0}}}

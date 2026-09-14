@@ -1,0 +1,1 @@
+{"name": "move_to", "arguments": {"note": "Gripper is above the block per top view; descending straight down to pinch height (pads ~1 cm above table) while staying open.", "targets": {"x": 0.305, "y": 0.19, "z": 0.03, "gripper": 1.0}}}
