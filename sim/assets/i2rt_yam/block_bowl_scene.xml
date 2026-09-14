@@ -47,8 +47,6 @@
     <!-- cameras: top-down + oblique side view of the workspace -->
     <camera name="top" pos="0.28 0 0.95" xyaxes="1 0 0 0 1 0" fovy="45"/>
     <camera name="side" pos="0.28 -0.85 0.55" xyaxes="1 0 0 0 0.55 0.835" fovy="45"/>
-    <!-- wrist camera: pose overwritten every render to track the gripper (see yam_sim._observe) -->
-    <camera name="wrist" pos="0 0 0.5" fovy="70"/>
   </worldbody>
 
   <!-- sticky-grasp assist: activated at runtime when the gripper closes on the

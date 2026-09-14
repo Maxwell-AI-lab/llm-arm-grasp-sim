@@ -157,7 +157,6 @@ class YamBlockBowlEmbodiment:
                 cameras=(
                     CameraSpec(name="top", height=_IMG, width=_IMG, channels=3),
                     CameraSpec(name="side", height=_IMG, width=_IMG, channels=3),
-                    CameraSpec(name="wrist", height=_IMG, width=_IMG, channels=3),
                 ),
                 state_keys=frozenset({"eef_state"}),
                 state=StateSpec(
@@ -179,10 +178,7 @@ class YamBlockBowlEmbodiment:
                 "and opens sideways along world y. gripper is normalized: 1 = fully open, "
                 "0 = fully closed. There is one red 5 cm cube on the table and one white "
                 "bowl. The 'top' camera looks straight down at the workspace; the 'side' "
-                "camera views the workspace obliquely from the front (-y side); the "
-                "'wrist' camera is mounted on the gripper wrist and looks down at the "
-                "fingertips, so the block appears centred between the fingers when the "
-                "gripper is directly above it."
+                "camera views the workspace obliquely from the front (-y side)."
             ),
         )
 
@@ -338,7 +334,7 @@ class YamBlockBowlEmbodiment:
 
     def _observe(self, instruction: str | None) -> Observation:
         images = {}
-        for cam in ("top", "side", "wrist"):
+        for cam in ("top", "side"):
             self.renderer.update_scene(self.data, camera=cam)
             images[cam] = self.renderer.render().copy()
         return Observation(
